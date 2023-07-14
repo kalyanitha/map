@@ -1,0 +1,55 @@
+Aim: Build a Web App and publish it to Docker.
+Let’s start by creating a new project in the Microsoft Visual Studio 
+ 
+Select the ASP.NET Core Web App form the various options.
+ 
+ 
+Give an appropriate name to the project.
+ 
+
+Click on the Create button.
+ 
+Once the project is created, Try executing the project to make sure that it works.
+ 
+
+
+Output:
+ 
+ 
+Right click on the app name then select the Add option form the menu.
+Select the Docker Support under the Add menu  
+
+
+Select the Target OS as Linux and click OK button.
+ 
+ 
+The file naming Dockerfile will appear 
+ 
+Code for Dockerfile:
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+COPY ["Mywebapp/Mywebapp.csproj", "Mywebapp/"]
+RUN dotnet restore "Mywebapp/Mywebapp.csproj"
+COPY . .
+WORKDIR "/src/Mywebapp"
+RUN dotnet build "Mywebapp.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Mywebapp.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Mywebapp.dll"]
+
+
+The project is uploaded to the docker.
+ 
+ 
