@@ -1,0 +1,30 @@
+Aim: Working with Docker Containers and Commands: Build an image then push it to docker and run it
+Command: to create docker file
+1)	cat > Dockerfile <<EOF
+2)	FROM busybox
+3)	CMD echo "Hello world! This is my first Docker image."
+4)	EOF 
+Output:
+ 
+Command: to build image from docker file 
+docker build -t ashupat/repo6 .
+Output:
+ 
+Command: to check docker images 
+docker images 
+Output:
+ 
+Command: to tag image
+docker tag 431fb3ccaa71 ashupat/repo6:image
+Command: to push image to docker hub 
+docker push ashupat/repo6:image
+ 
+ 
+Now check it on docker hub.
+ 
+
+Command: to run docker image: 
+docker run kbdocker11/repo2
+Output:
+ 
+
