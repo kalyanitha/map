@@ -1,0 +1,102 @@
+Aim: Build a Web Application using MVC.
+Firstly download, install & open Microsoft Visual Studio 2022
+(https://visualstudio.microsoft.com/vs/)
+
+Create a new project:
+ 
+Select the ASP.NET Core Web App (Model-View_Controller)
+ 
+Provide a name to the project:
+  
+
+ 
+Code for HomeController.cs under Controller folder:
+using Microsoft.AspNetCore.Mvc;
+using myfirstmvc.Models;
+using System.Diagnostics;
+namespace myfirstmvc.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
+
+
+
+Code for ErrorViewModel.cs under Model folder:
+namespace myfirstmvc.Models
+{
+    public class ErrorViewModel
+    {
+        public string? RequestId { get; set; }
+        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    }
+}
+
+ 
+Code for Index.cshtml under View\Home folder:
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+
+Code for Privacy.cshtml under View\Home folder:
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+<p>Use this page to detail your site's privacy policy.</p>
+
+
+
+Code for Program.cs:
+var builder = WebApplication.CreateBuilder(args);
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+var app = builder.Build();
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthorization();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.Run();
+ 
+
+After that click the run project button under the top ribbon
+
+
+Output:
