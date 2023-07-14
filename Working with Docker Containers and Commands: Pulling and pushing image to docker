@@ -1,0 +1,48 @@
+Aim: Working with Docker Containers and Commands: Pulling and pushing image to docker.
+Create Docker Hub account (sign up)
+Login to https://labs.play-with-docker.com/
+ 
+Click on start 
+Add new instance
+ 
+To pull and push images using docker
+Command: to check docker version 
+docker –version
+Output:
+ 
+Command: to pull readymade image 
+docker pull rocker/verse
+Output:
+ 
+Command: to check images in docker 
+docker images
+Output:
+ 
+Now Login to docker hub and create repository 
+Output:
+ 
+Click on Create button
+Now check repository created
+ 
+Command: to login to your docker account
+docker login –username=ashupat password:
+note:ashupat is my docker ID . You will use your docker ID here. And enter your password .
+Output:
+ 
+Command: to tag image
+docker tag c41250521d1f ashupat/repo5:newverse
+note: here c41250521d1f this is image id which you can get from docker images command.
+
+Output:
+ 
+Command: to push image to docker hub account 
+docker push ashupat/repo5:newverse
+note: newverse is tag name created above.
+Output:
+ 
+
+Check it in docker hub now
+ 
+
+
+Click on tags and check.
